@@ -3,6 +3,8 @@ import * as THREE from "three";
 import WebGPU from "three/addons/capabilities/WebGPU.js";
 import WebGPURenderer from "three/addons/renderers/webgpu/WebGPURenderer.js";
 
+import WebGL from "three/addons/capabilities/WebGL.js";
+
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
@@ -12,9 +14,15 @@ init();
 animate();
 
 function init() {
-  if (WebGPU.isAvailable() === false) {
+  // Check for WebGPU compatibility. Use WebGL as an alternative.
+  if (WebGPU.isAvailable()) {
+    renderer = new WebGPURenderer({ antialias: true });
+  } else if (WebGL.isWebGLAvailable()) {
+    renderer = new THREE.WebGLRenderer();
+  } else {
     document.body.appendChild(WebGPU.getErrorMessage());
-    throw new Error("No WebGPU support");
+    document.body.appendChild(WebGL.getWebGLErrorMessage());
+    throw new Error("No WebGPU nor WebGL support.");
   }
 
   const container = document.createElement("div");
@@ -80,7 +88,6 @@ function init() {
     }
   );
 
-  renderer = new WebGPURenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
