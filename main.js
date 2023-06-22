@@ -40,7 +40,7 @@ function init() {
   container.appendChild(textDiv);
 
   camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 50);
-  camera.position.set(7, 7, 7);
+  camera.position.set(5, 5, 5);
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color("#595959");
