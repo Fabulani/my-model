@@ -70,9 +70,8 @@ function init() {
     // called while loading is progressing
     function (xhr) {
       var progressValue = Math.ceil((xhr.loaded / xhr.total) * 100);
-      console.log(xhr, progressValue);
       progress.value = progressValue;
-      textNode.data = progressValue + "%";
+      textNode.data = "Loading . . . " + progressValue + "%";
     },
     // called when loading has errors
     function (error) {
