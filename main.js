@@ -46,18 +46,18 @@ function init() {
   scene.background = new THREE.Color("#595959");
 
   // Lights
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
   scene.add(ambientLight);
 
-  const dirLight = new THREE.DirectionalLight(0xffffff, 5);
+  const dirLight = new THREE.DirectionalLight(0xffffff, 3);
   dirLight.position.set(1, 1, 0);
   scene.add(dirLight);
 
-  const dirLight2 = new THREE.DirectionalLight(0xffffff, 5);
+  const dirLight2 = new THREE.DirectionalLight(0xffffff, 3);
   dirLight2.position.set(0, 1, 1);
   scene.add(dirLight2);
 
-  const dirLight3 = new THREE.DirectionalLight(0xffffff, 5);
+  const dirLight3 = new THREE.DirectionalLight(0xffffff, 3);
   dirLight3.position.set(-1, 1, -1);
   scene.add(dirLight3);
 
