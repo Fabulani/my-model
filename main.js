@@ -71,7 +71,7 @@ function init() {
     function (xhr) {
       var progressValue = Math.ceil((xhr.loaded / xhr.total) * 100);
       progress.value = progressValue;
-      textNode.data = "Loading . . . " + progressValue + "%";
+      textNode.data = "Loading . . . "; // Commented out until fixed: + progressValue + "%";
     },
     // called when loading has errors
     function (error) {
