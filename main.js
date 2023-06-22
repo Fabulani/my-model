@@ -69,7 +69,7 @@ function init() {
     },
     // called while loading is progressing
     function (xhr) {
-      var progressValue = (xhr.loaded / xhr.total) * 100;
+      var progressValue = Math.ceil((xhr.loaded / xhr.total) * 100);
       progress.value = progressValue;
       textNode.data = progressValue + "%";
     },
