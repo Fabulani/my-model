@@ -35,7 +35,7 @@ function init() {
   camera.position.set(7, 7, 7);
 
   scene = new THREE.Scene();
-  scene.background = new THREE.Color("#424549");
+  scene.background = new THREE.Color("#191919");
 
   // Lights
   const ambientLight = new THREE.AmbientLight(0xffffff, 1);
