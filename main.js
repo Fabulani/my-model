@@ -17,8 +17,10 @@ function init() {
   // Check for WebGPU compatibility. Use WebGL as an alternative.
   if (WebGPU.isAvailable()) {
     renderer = new WebGPURenderer({ antialias: true });
+    console.log("WebGPU support detected.");
   } else if (WebGL.isWebGLAvailable()) {
     renderer = new THREE.WebGLRenderer();
+    console.log("No WebGPU support detected, using WebGL instead.");
   } else {
     document.body.appendChild(WebGPU.getErrorMessage());
     document.body.appendChild(WebGL.getWebGLErrorMessage());
@@ -35,7 +37,7 @@ function init() {
 
   // Text inside progress bar
   const textDiv = document.createElement("span");
-  let textNode = document.createTextNode("Hello World");
+  let textNode = document.createTextNode("");
   textDiv.appendChild(textNode);
   container.appendChild(textDiv);
 
@@ -64,13 +66,13 @@ function init() {
   // Model
   const loader = new GLTFLoader();
   loader.load(
-    "public/1686239375582.gltf",
+    "./public/model.gltf",
     function (gltf) {
       gltf.scene.scale.set(0.01, 0.01, 0.01);
       gltf.scene.position.y = -3.5;
       gltf.scene.position.z = -0.5;
       scene.add(gltf.scene);
-      //   progress.remove(); // Remove progress bar
+      // progress.remove(); // Remove progress bar. Uncommenting makes it disappear immediatelly instead of fading
       progress.className = "hidden";
       textDiv.className = "hidden";
       render();
@@ -80,11 +82,11 @@ function init() {
       var progressValue = Math.ceil((xhr.loaded / xhr.total) * 100);
       progress.value = progressValue;
       textNode.data = "Loading . . . "; // Commented out until fixed: + progressValue + "%";
+      //! Issue: on local, progress always shows '100%'. Deployed, shows absurd number
     },
     // called when loading has errors
     function (error) {
-      textNode.data = "ERROR :(";
-      console.log("Error while loading gltf model.");
+      textNode.data = "ERROR loading model";
     }
   );
 
@@ -95,7 +97,6 @@ function init() {
   container.appendChild(renderer.domElement);
 
   controls = new OrbitControls(camera, renderer.domElement);
-  controls.addEventListener("change", render); // use if there is no animation loop
   controls.minDistance = 5;
   controls.maxDistance = 20;
   controls.autoRotate = true;
@@ -114,8 +115,6 @@ function onWindowResize() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   render();
 }
-
-//
 
 function render() {
   renderer.render(scene, camera);
