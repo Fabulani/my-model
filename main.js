@@ -14,11 +14,13 @@ init();
 animate();
 
 function init() {
+  // Disabling WebGPU support to check if model loads faster.
   // Check for WebGPU compatibility. Use WebGL as an alternative.
-  if (WebGPU.isAvailable()) {
-    renderer = new WebGPURenderer({ antialias: true });
-    console.log("WebGPU support detected.");
-  } else if (WebGL.isWebGLAvailable()) {
+  // if (WebGPU.isAvailable()) {
+  //   renderer = new WebGPURenderer({ antialias: true });
+  //   console.log("WebGPU support detected.");
+  // } else if (WebGL.isWebGLAvailable()) {
+  if (WebGL.isWebGLAvailable()) {
     renderer = new THREE.WebGLRenderer();
     console.log("No WebGPU support detected, using WebGL instead.");
   } else {
