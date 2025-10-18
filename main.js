@@ -20,7 +20,6 @@ function init() {
     renderer = new WebGPURenderer({ antialias: true });
     console.log("WebGPU support detected.");
   } else if (WebGL.isWebGLAvailable()) {
-  if (WebGL.isWebGLAvailable()) {
     renderer = new THREE.WebGLRenderer();
     console.log("No WebGPU support detected, using WebGL instead.");
   } else {
