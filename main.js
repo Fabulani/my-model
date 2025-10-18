@@ -14,7 +14,6 @@ init();
 animate();
 
 function init() {
-  // Disabling WebGPU support to check if model loads faster.
   // Check for WebGPU compatibility. Use WebGL as an alternative.
   if (WebGPU.isAvailable()) {
     renderer = new WebGPURenderer({ antialias: true });
